@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { SortService } from '../sort.service';
+import { SortService } from '../services/sort/sort.service';
 
 @Component({
   selector: 'app-layout',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { PokemonService } from '../../pokemon.service';
+import { PokemonService } from '../../services/pokemon/pokemon.service';
 import { loadPokemon, loadPokemonSuccess, loadPokemonFailure } from '../actions/pokemon.actions';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';

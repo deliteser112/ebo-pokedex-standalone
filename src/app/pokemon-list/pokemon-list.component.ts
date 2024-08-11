@@ -7,8 +7,8 @@ import { Store } from '@ngrx/store';
 import { PokemonState } from '../store/reducers/pokemon.reducer';
 import { loadPokemon } from '../store/actions/pokemon.actions';
 import { selectAllPokemon, selectPokemonLoading } from '../store/selectors/pokemon.selectors';
-import { SortService } from '../sort.service';
-import { PokemonService } from '../pokemon.service';
+import { SortService } from '../services/sort/sort.service';
+import { PokemonService } from '../services/pokemon/pokemon.service';
 import { Pokemon } from '../models/pokemon.model';
 
 @Component({

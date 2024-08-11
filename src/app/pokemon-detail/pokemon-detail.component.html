@@ -1,43 +1,52 @@
 <div *ngIf="isLoading" class="loading-skeleton">
-  <div class="skeleton-card">
-    <div class="skeleton-header">
-      <div class="skeleton-title"></div>
-      <div class="skeleton-type"></div>
-      <div class="skeleton-type"></div>
+  <div class="skeleton-container">
+    <div class="skeleton-card">
+      <div class="skeleton-header">
+        <div class="skeleton-title"></div>
+        <div class="skeleton-type"></div>
+        <div class="skeleton-type"></div>
+      </div>
+      <div class="skeleton-image"></div>
+      <div class="skeleton-info"></div>
+      <div class="skeleton-info"></div>
+      <div class="skeleton-info"></div>
     </div>
-    <div class="skeleton-image"></div>
-    <div class="skeleton-info"></div>
-    <div class="skeleton-info"></div>
-    <div class="skeleton-info"></div>
-    <div class="skeleton-stats"></div>
+    <div class="skeleton-stats">
+      <div class="skeleton-stats-content"></div>
+    </div>
   </div>
 </div>
-<div *ngIf="!isLoading" class="pokemon-detail">
-  <div class="pokemon-header">
-    <h1>{{ pokemon.name | titlecase }}</h1>
-    <div class="pokemon-types">
-      <span *ngFor="let type of pokemon.types" class="pokemon-type">
-        {{ type.type.name | titlecase }}
-      </span>
+
+<div *ngIf="!isLoading" class="pokemon-detail-container">
+  <div class="pokemon-detail">
+    <div class="pokemon-header">
+      <h1>{{ pokemon.name | titlecase }}</h1>
+      <div class="pokemon-types">
+        <span *ngFor="let type of pokemon.types" class="pokemon-type">
+          {{ type.type.name | titlecase }}
+        </span>
+      </div>
     </div>
-  </div>
 
-  <div class="pokemon-image">
-    <img [src]="pokemon.sprites.front_default" alt="{{ pokemon.name }}" />
-  </div>
+    <div class="pokemon-image">
+      <img [src]="pokemon.sprites.front_default" alt="{{ pokemon.name }}" />
+    </div>
 
-  <div class="pokemon-info">
-    <p><strong>Base XP:</strong> {{ pokemon.base_experience }}</p>
-    <p>
-      <strong>Height:</strong> {{ pokemon.height }} | <strong>Weight:</strong>
-      {{ pokemon.weight }}
-    </p>
-    <p>
-      <strong>Abilities:</strong>
-      <span *ngFor="let ability of pokemon.abilities">{{
-        ability.ability.name | titlecase
-      }}</span>
-    </p>
+    <div class="pokemon-info">
+      <p><strong>Base XP:</strong> {{ pokemon.base_experience }}</p>
+      <p>
+        <strong>Height:</strong> {{ pokemon.height }} | <strong>Weight:</strong>
+        {{ pokemon.weight }}
+      </p>
+      <p>
+        <strong>Abilities:</strong>
+        <span
+          *ngFor="let ability of pokemon.abilities"
+          class="pokemon-ability"
+          >{{ ability.ability.name | titlecase }}</span
+        >
+      </p>
+    </div>
   </div>
 
   <div class="pokemon-stats">
@@ -50,7 +59,8 @@
     >
     </canvas>
   </div>
-  <div style="width: 100%; display: flex; justify-content: flex-end">
+
+  <div class="back-button-container">
     <button (click)="goBack()" class="back-button">Back</button>
   </div>
 </div>

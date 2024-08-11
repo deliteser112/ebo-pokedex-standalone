@@ -46,7 +46,7 @@ describe('Pokemon Model', () => {
     expect(mockPokemon.id).toBe(4);
     expect(mockPokemon.name).toBe('charmander');
     expect(mockPokemon.sprites.front_default).toBe('https://example.com/sprite.png');
-    expect(mockPokemon.game_indices).toBeUndefined(); // Optional field is undefined
+    expect(mockPokemon.game_indices).toBeUndefined();
     expect(mockPokemon.base_experience).toBe(62);
     expect(mockPokemon.height).toBe(6);
     expect(mockPokemon.weight).toBe(85);

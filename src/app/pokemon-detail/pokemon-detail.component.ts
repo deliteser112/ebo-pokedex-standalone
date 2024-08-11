@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PokemonService } from '../pokemon.service';
+import { PokemonService } from '../services/pokemon/pokemon.service';
 import { CommonModule } from '@angular/common';
 import { NgChartsModule } from 'ng2-charts';
 import { ChartOptions, ChartData, ChartType } from 'chart.js';
@@ -10,7 +10,7 @@ import { ChartOptions, ChartData, ChartType } from 'chart.js';
   templateUrl: './pokemon-detail.component.html',
   styleUrls: ['./pokemon-detail.component.scss'],
   standalone: true,
-  imports: [CommonModule, NgChartsModule], // Import NgChartsModule
+  imports: [CommonModule, NgChartsModule],
 })
 export class PokemonDetailComponent implements OnInit {
   isLoading: boolean = true;
