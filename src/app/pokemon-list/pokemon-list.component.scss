@@ -1,0 +1,116 @@
+.scroll-viewport {
+    display: block;
+    height: calc(100vh - 100px);
+    width: 100%;
+}
+
+.pokemon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+    padding: 10px;
+}
+
+.pokemon-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    padding: 16px;
+    text-align: center;
+}
+
+.pokemon-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.pokemon-image {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 12px;
+}
+
+.pokemon-info h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.pokemon-info p {
+    margin: 8px 0;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.pokemon-info span {
+    display: inline-block;
+    margin-right: 8px;
+    background-color: #eee;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+@media screen and (max-width: 768px) {
+    .content {
+        padding: 0;
+    }
+
+    .scroll-viewport {
+        height: calc(100vh - 100px);
+        padding: 16px;
+    }
+}
+
+/* Skeleton loading animations */
+@keyframes skeleton-loading {
+    0% {
+        background-color: #eeeeee;
+    }
+
+    100% {
+        background-color: #dddddd;
+    }
+}
+
+.skeleton-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    text-align: center;
+    animation: skeleton-loading 1s linear infinite alternate;
+    min-height: 315px;
+
+    .skeleton-image,
+    .skeleton-text {
+        border-radius: 4px;
+        background-color: #e0e0e0;
+        animation: skeleton-loading 1s linear infinite alternate;
+    }
+
+    .skeleton-image {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 12px;
+    }
+
+    .skeleton-text {
+        height: 16px;
+        margin: 8px 0;
+    }
+
+    .skeleton-title {
+        width: 60%;
+        margin: 0 auto 12px;
+        height: 20px;
+    }
+
+    .skeleton-info {
+        width: 80%;
+        margin: 4px auto;
+    }
+}

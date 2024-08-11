@@ -1,0 +1,45 @@
+<cdk-virtual-scroll-viewport itemSize="315" class="scroll-viewport">
+    <div class="pokemon-grid">
+      <!-- Skeleton Loaders -->
+      <ng-container *ngIf="isLoading">
+        <div class="skeleton-card" *ngFor="let _ of skeletonArray">
+          <div class="skeleton-image"></div>
+          <div class="skeleton-title"></div>
+          <div class="skeleton-info"></div>
+          <div class="skeleton-info"></div>
+          <div class="skeleton-info"></div>
+        </div>
+      </ng-container>
+  
+      <!-- Actual Pokémon Cards -->
+      <ng-container *ngIf="!isLoading">
+        <div
+          class="pokemon-card"
+          *ngFor="let pokemon of sortedPokemonList"
+          [routerLink]="['/pokemon', pokemon.id]"
+        >
+          <img
+            [src]="pokemon.image"
+            alt="{{ pokemon.name }}"
+            class="pokemon-image"
+            loading="lazy"
+          />
+          <div class="pokemon-info">
+            <h3>{{ pokemon.name | titlecase }} (#{{ pokemon.id }})</h3>
+            <p><strong>Base XP:</strong> {{ pokemon.baseExperience }}</p>
+            <p>
+              <strong>Height:</strong> {{ pokemon.height }} |
+              <strong>Weight:</strong> {{ pokemon.weight }}
+            </p>
+            <p>
+              <strong>Types:</strong>
+              <span *ngFor="let type of pokemon.types">{{
+                type.name | titlecase
+              }}</span>
+            </p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </cdk-virtual-scroll-viewport>
+  

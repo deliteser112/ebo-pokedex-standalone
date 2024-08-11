@@ -1,0 +1,36 @@
+<div *ngIf="isLoading" class="loading-skeleton">
+  <h1>Loading...</h1>
+</div>
+<div *ngIf="!isLoading" class="pokemon-detail">
+  <div class="pokemon-header">
+    <h1>{{ pokemon.name | titlecase }}</h1>
+    <div class="pokemon-types">
+      <span *ngFor="let type of pokemon.types" class="pokemon-type">
+        {{ type.type.name | titlecase }}
+      </span>
+    </div>
+  </div>
+
+  <div class="pokemon-image">
+    <img [src]="pokemon.sprites.front_default" alt="{{ pokemon.name }}" />
+  </div>
+
+  <div class="pokemon-info">
+    <p><strong>Base XP:</strong> {{ pokemon.base_experience }}</p>
+    <p>
+      <strong>Height:</strong> {{ pokemon.height }} | <strong>Weight:</strong>
+      {{ pokemon.weight }}
+    </p>
+    <p>
+      <strong>Abilities:</strong>
+      <span *ngFor="let ability of pokemon.abilities">{{
+        ability.ability.name | titlecase
+      }}</span>
+    </p>
+  </div>
+
+  <div class="pokemon-stats">
+    <h3>Stats</h3>
+    <canvas id="pokemonStatsChart"></canvas>
+  </div>
+</div>

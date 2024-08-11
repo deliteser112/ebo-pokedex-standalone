@@ -1,0 +1,37 @@
+.pokemon-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+}
+
+.pokemon-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pokemon-types {
+    margin-top: 8px;
+}
+
+.pokemon-type {
+    background-color: #ddd;
+    padding: 4px 8px;
+    margin-right: 4px;
+    border-radius: 4px;
+}
+
+.pokemon-image {
+    margin: 20px 0;
+}
+
+.pokemon-info {
+    text-align: center;
+}
+
+.pokemon-stats {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+}
