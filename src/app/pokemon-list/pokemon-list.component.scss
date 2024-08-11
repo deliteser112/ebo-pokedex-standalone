@@ -1,5 +1,7 @@
 .scroll-viewport {
-    display: block;
+    display: flex;
+    justify-content: center; // Center content horizontally
+    align-items: center; // Center content vertically
     height: calc(100vh - 190px);
     width: 100%;
     max-width: 1440px;
@@ -11,6 +13,9 @@
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 16px;
     padding: 10px;
+    width: 100%; // Ensure grid takes up full width
+    height: 100%;
+    align-content: start; // Align the content to the top
 }
 
 .pokemon-card {
@@ -61,7 +66,7 @@
     }
 
     .scroll-viewport {
-        height: calc(100vh - 100px);
+        height: calc(100vh - 225px);
         padding: 16px;
     }
 }
@@ -123,16 +128,20 @@
     justify-content: center;
     align-items: center;
     margin: 20px 0;
+    font-size: 1.2rem;
 
-    button {
+    .pagination-button {
         background-color: #1976d2;
         color: white;
         border: none;
-        padding: 10px 20px;
+        padding: 10px 15px;
         margin: 0 10px;
         cursor: pointer;
         border-radius: 5px;
         transition: background-color 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         &:hover:not(:disabled) {
             background-color: #1565c0;
@@ -141,6 +150,64 @@
         &:disabled {
             background-color: #b0bec5;
             cursor: not-allowed;
+        }
+
+        i {
+            font-size: 1.2rem;
+        }
+    }
+
+    .pagination-input {
+        width: 50px;
+        padding: 5px 10px;
+        margin: 0 10px;
+        text-align: center;
+        font-size: 1.2rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease-in-out;
+
+        &:focus {
+            border-color: #1976d2;
+        }
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        -moz-appearance: textfield;
+    }
+
+    span {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.no-results-wrapper {
+    width: 100%;
+    height: 500px;
+    .no-results {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #757575;
+        z-index: 10;
+
+        i {
+            font-size: 3rem;
+            color: #1976d2;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 10px 0;
         }
     }
 }

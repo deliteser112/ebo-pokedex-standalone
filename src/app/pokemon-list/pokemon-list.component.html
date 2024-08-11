@@ -11,11 +11,18 @@
       </div>
     </ng-container>
 
-    <!-- Actual Pokémon Cards -->
+    <!-- No Results Found -->
     <ng-container *ngIf="!isLoading && filteredPokemonList.length === 0">
-      <div>No Pokémon found for your search.</div>
+      <div class="no-results-wrapper">
+        <div class="no-results">
+          <i class="fas fa-search"></i> <!-- Font Awesome search icon -->
+          <p>No Pokémon found for your search on this page. Try adjusting your search or explore other pages.</p>
+          
+        </div>
+      </div>
     </ng-container>
 
+    <!-- Actual Pokémon Cards -->
     <ng-container *ngIf="!isLoading && filteredPokemonList.length > 0">
       <div
         class="pokemon-card"
@@ -23,14 +30,14 @@
         [routerLink]="['/pokemon', pokemon.id]"
       >
         <img
-          [src]="pokemon.image"
+          [src]="pokemon.sprites.front_default"
           alt="{{ pokemon.name }}"
           class="pokemon-image"
           loading="lazy"
         />
         <div class="pokemon-info">
           <h3>{{ pokemon.name | titlecase }} (#{{ pokemon.id }})</h3>
-          <p><strong>Base XP:</strong> {{ pokemon.baseExperience }}</p>
+          <p><strong>Base XP:</strong> {{ pokemon.base_experience }}</p>
           <p>
             <strong>Height:</strong> {{ pokemon.height }} |
             <strong>Weight:</strong> {{ pokemon.weight }}
@@ -38,7 +45,7 @@
           <p>
             <strong>Types:</strong>
             <span *ngFor="let type of pokemon.types">{{
-              type.name | titlecase
+              type.type.name | titlecase
             }}</span>
           </p>
         </div>
@@ -48,7 +55,23 @@
 </cdk-virtual-scroll-viewport>
 
 <div class="pagination-controls">
-  <button (click)="onPreviousPage()" [disabled]="offset === 0">Previous</button>
-  <span>Page {{ offset / limit + 1 }} of {{ Math.ceil(count / limit) }}</span>
-  <button (click)="onNextPage()" [disabled]="offset + limit >= count">Next</button>
+  <button class="pagination-button" (click)="onPreviousPage()" [disabled]="offset === 0">
+    <i class="fas fa-chevron-left"></i>
+  </button>
+  
+  <span>Page 
+    <input 
+      class="pagination-input" 
+      type="number" 
+      [value]="currentPage" 
+      (input)="onPageNumberChange($event)" 
+      min="1" 
+      [max]="totalPages"
+    /> 
+    of {{ totalPages }}
+  </span>
+  
+  <button class="pagination-button" (click)="onNextPage()" [disabled]="offset + limit >= count">
+    <i class="fas fa-chevron-right"></i>
+  </button>
 </div>

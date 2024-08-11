@@ -6,21 +6,26 @@
     (click)="goToHome()"
   />
   <div class="spacer"></div>
-  <input
-    type="text"
-    placeholder="Search Pokémon..."
-    [(ngModel)]="searchQuery"
-    (input)="onSearchChange($event)"
-    class="search-input"
-  />
-  <select
-    [(ngModel)]="sortOption"
-    (change)="onSortChange($event)"
-    class="sort-select"
-  >
-    <option value="default">Default Order</option>
-    <option value="pokedex">Pokédex Order</option>
-  </select>
+  <div class="option-container">
+    <div class="search-container">
+      <input
+        type="text"
+        placeholder="Search Pokémon..."
+        [(ngModel)]="searchQuery"
+        (input)="onSearchChange($event)"
+        class="search-input"
+      />
+      <i class="fas fa-search search-icon"></i>
+    </div>
+    <select
+      [(ngModel)]="sortOption"
+      (change)="onSortChange($event)"
+      class="sort-select"
+    >
+      <option value="default">Default Order</option>
+      <option value="pokedex">Pokédex Order</option>
+    </select>
+  </div>
 </div>
 
 <div class="content" role="main">
