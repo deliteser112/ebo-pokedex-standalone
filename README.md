@@ -66,5 +66,4 @@ The build artifacts will be stored in the dist/ directory.
 
 - Start development server: `npm start`
 - Run unit tests: `npm test`
-- Run end-to-end tests: `npm run e2e`
 - Build for production: `npm run build`
