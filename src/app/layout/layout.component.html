@@ -1,12 +1,16 @@
 <div class="toolbar">
-    <span>Pokédex</span>
-    <div class="spacer"></div>
-    <select [(ngModel)]="sortOption" (change)="onSortChange($event)">
-      <option value="default">Default Order</option>
-      <option value="pokedex">Pokédex Order</option>
-    </select>
+  <img src="assets/pokemon-logo.png" alt="Pokémon Logo" class="logo" />
+  <div class="spacer"></div>
+  <select
+    [(ngModel)]="sortOption"
+    (change)="onSortChange($event)"
+    class="sort-select"
+  >
+    <option value="default">Default Order</option>
+    <option value="pokedex">Pokédex Order</option>
+  </select>
 </div>
 
 <div class="content" role="main">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>

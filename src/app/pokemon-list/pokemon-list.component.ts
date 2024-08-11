@@ -1,4 +1,4 @@
-// src/app/pokemon-list/pokemon-list.component.ts
+// pokemon-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -18,19 +18,29 @@ import { SortService } from '../sort.service';
 export class PokemonListComponent implements OnInit {
   pokemonList: any[] = [];
   sortedPokemonList: any[] = [];
-  sortOption: string = 'default';
   isLoading = true;
   skeletonArray = Array(12); // Adjust the number based on the grid size
+  limit = 20; // Number of Pokémon per page
+  offset = 0; // Current offset (page position)
+  count = 0; // Total number of Pokémon
 
-  constructor(private pokemonService: PokemonService, private sortService: SortService) {}
+  constructor(
+    private pokemonService: PokemonService,
+    private sortService: SortService
+  ) {}
 
   ngOnInit(): void {
     this.sortService.sortOption$.subscribe((sortOption) => {
-      this.sortOption = sortOption;
-      this.sortPokemonList();
+      this.sortPokemonList(sortOption);
     });
 
-    this.pokemonService.getPokemonList().subscribe((response) => {
+    this.loadPokemon();
+  }
+
+  loadPokemon(): void {
+    this.isLoading = true;
+    this.pokemonService.getPokemonList(this.limit, this.offset).subscribe((response) => {
+      this.count = response.count;
       this.pokemonList = response.results.map((pokemon: { name: string; url: string }) => {
         const id = pokemon.url.split('/').filter((part) => part).pop();
         return {
@@ -59,16 +69,30 @@ export class PokemonListComponent implements OnInit {
         });
       });
 
-      this.sortPokemonList();
+      this.sortPokemonList(this.sortService.getSortOption());
       this.isLoading = false;
     });
   }
 
-  sortPokemonList() {
-    if (this.sortOption === 'default') {
+  sortPokemonList(sortOption: string) {
+    if (sortOption === 'default') {
       this.sortedPokemonList = this.pokemonList;
-    } else if (this.sortOption === 'pokedex') {
+    } else if (sortOption === 'pokedex') {
       this.sortedPokemonList = [...this.pokemonList].sort((a, b) => a.gameIndex - b.gameIndex);
+    }
+  }
+
+  onNextPage(): void {
+    if (this.offset + this.limit < this.count) {
+      this.offset += this.limit;
+      this.loadPokemon();
+    }
+  }
+
+  onPreviousPage(): void {
+    if (this.offset > 0) {
+      this.offset -= this.limit;
+      this.loadPokemon();
     }
   }
 }

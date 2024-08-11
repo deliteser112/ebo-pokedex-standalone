@@ -114,3 +114,30 @@
         margin: 4px auto;
     }
 }
+
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+
+    button {
+        background-color: #1976d2;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin: 0 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+
+        &:hover:not(:disabled) {
+            background-color: #1565c0;
+        }
+
+        &:disabled {
+            background-color: #b0bec5;
+            cursor: not-allowed;
+        }
+    }
+}

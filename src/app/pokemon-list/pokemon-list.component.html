@@ -43,3 +43,7 @@
     </div>
   </cdk-virtual-scroll-viewport>
   
+  <div class="pagination-controls">
+    <button (click)="onPreviousPage()" [disabled]="offset === 0">Previous</button>
+    <button (click)="onNextPage()" [disabled]="offset + limit >= count">Next</button>
+  </div>

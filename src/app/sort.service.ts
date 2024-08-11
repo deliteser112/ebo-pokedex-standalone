@@ -1,4 +1,4 @@
-// src/app/sort.service.ts
+// sort.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -6,10 +6,14 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class SortService {
-  private sortOptionSubject = new BehaviorSubject<string>('default');
-  sortOption$ = this.sortOptionSubject.asObservable();
+  private sortOptionSource = new BehaviorSubject<string>('default');
+  sortOption$ = this.sortOptionSource.asObservable();
 
-  setSortOption(option: string): void {
-    this.sortOptionSubject.next(option);
+  setSortOption(option: string) {
+    this.sortOptionSource.next(option);
+  }
+
+  getSortOption(): string {
+    return this.sortOptionSource.getValue();
   }
 }
