@@ -1,16 +1,19 @@
+// src/app/pokemon-list/pokemon-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PokemonService } from '../pokemon.service';
+import { SortService } from '../sort.service';
 
 @Component({
   selector: 'app-pokemon-list',
   standalone: true,
   imports: [CommonModule, ScrollingModule, RouterModule, FormsModule],
   templateUrl: './pokemon-list.component.html',
-  styleUrls: ['./pokemon-list.component.scss']
+  styleUrls: ['./pokemon-list.component.scss'],
+  providers: [PokemonService], // Ensure service is provided
 })
 export class PokemonListComponent implements OnInit {
   pokemonList: any[] = [];
@@ -19,12 +22,17 @@ export class PokemonListComponent implements OnInit {
   isLoading = true;
   skeletonArray = Array(12); // Adjust the number based on the grid size
 
-  constructor(private pokemonService: PokemonService) { }
+  constructor(private pokemonService: PokemonService, private sortService: SortService) {}
 
   ngOnInit(): void {
-    this.pokemonService.getPokemonList().subscribe(response => {
+    this.sortService.sortOption$.subscribe((sortOption) => {
+      this.sortOption = sortOption;
+      this.sortPokemonList();
+    });
+
+    this.pokemonService.getPokemonList().subscribe((response) => {
       this.pokemonList = response.results.map((pokemon: { name: string; url: string }) => {
-        const id = pokemon.url.split('/').filter(part => part).pop();
+        const id = pokemon.url.split('/').filter((part) => part).pop();
         return {
           name: pokemon.name,
           url: pokemon.url,
@@ -35,12 +43,12 @@ export class PokemonListComponent implements OnInit {
           height: 0,
           weight: 0,
           types: [],
-          abilities: []
+          abilities: [],
         };
       });
 
-      this.pokemonList.forEach(pokemon => {
-        this.pokemonService.getPokemonDetails(pokemon.id).subscribe(details => {
+      this.pokemonList.forEach((pokemon) => {
+        this.pokemonService.getPokemonDetails(pokemon.id).subscribe((details) => {
           pokemon.image = details.sprites.front_default;
           pokemon.gameIndex = details.game_indices[0]?.game_index || 0;
           pokemon.baseExperience = details.base_experience;
@@ -62,11 +70,5 @@ export class PokemonListComponent implements OnInit {
     } else if (this.sortOption === 'pokedex') {
       this.sortedPokemonList = [...this.pokemonList].sort((a, b) => a.gameIndex - b.gameIndex);
     }
-  }
-
-  onSortChange(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    this.sortOption = selectElement.value;
-    this.sortPokemonList();
   }
 }

@@ -1,5 +1,16 @@
 <div *ngIf="isLoading" class="loading-skeleton">
-  <h1>Loading...</h1>
+  <div class="skeleton-card">
+    <div class="skeleton-header">
+      <div class="skeleton-title"></div>
+      <div class="skeleton-type"></div>
+      <div class="skeleton-type"></div>
+    </div>
+    <div class="skeleton-image"></div>
+    <div class="skeleton-info"></div>
+    <div class="skeleton-info"></div>
+    <div class="skeleton-info"></div>
+    <div class="skeleton-stats"></div>
+  </div>
 </div>
 <div *ngIf="!isLoading" class="pokemon-detail">
   <div class="pokemon-header">
@@ -31,6 +42,15 @@
 
   <div class="pokemon-stats">
     <h3>Stats</h3>
-    <canvas id="pokemonStatsChart"></canvas>
+    <canvas
+      baseChart
+      [data]="radarChartData"
+      [options]="radarChartOptions"
+      [type]="radarChartType"
+    >
+    </canvas>
+  </div>
+  <div style="width: 100%; display: flex; justify-content: flex-end">
+    <button (click)="goBack()" class="back-button">Back</button>
   </div>
 </div>
