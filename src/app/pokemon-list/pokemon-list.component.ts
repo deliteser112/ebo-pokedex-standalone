@@ -1,4 +1,3 @@
-// pokemon-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -17,21 +16,26 @@ import { SortService } from '../sort.service';
 })
 export class PokemonListComponent implements OnInit {
   pokemonList: any[] = [];
-  sortedPokemonList: any[] = [];
+  filteredPokemonList: any[] = [];
   isLoading = true;
-  skeletonArray = Array(12); // Adjust the number based on the grid size
-  limit = 20; // Number of Pokémon per page
-  offset = 0; // Current offset (page position)
-  count = 0; // Total number of Pokémon
+  skeletonArray = Array(20);
+  limit = 20;
+  offset = 0;
+  count = 0;
+  Math = Math;
 
   constructor(
     private pokemonService: PokemonService,
     private sortService: SortService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.sortService.sortOption$.subscribe((sortOption) => {
       this.sortPokemonList(sortOption);
+    });
+
+    this.sortService.searchQuery$.subscribe((query) => {
+      this.filterPokemonList(query);
     });
 
     this.loadPokemon();
@@ -70,16 +74,23 @@ export class PokemonListComponent implements OnInit {
       });
 
       this.sortPokemonList(this.sortService.getSortOption());
+      this.filterPokemonList(this.sortService.getSearchQuery());
       this.isLoading = false;
     });
   }
 
   sortPokemonList(sortOption: string) {
     if (sortOption === 'default') {
-      this.sortedPokemonList = this.pokemonList;
+      this.filteredPokemonList = this.pokemonList;
     } else if (sortOption === 'pokedex') {
-      this.sortedPokemonList = [...this.pokemonList].sort((a, b) => a.gameIndex - b.gameIndex);
+      this.filteredPokemonList = [...this.pokemonList].sort((a, b) => a.gameIndex - b.gameIndex);
     }
+  }
+
+  filterPokemonList(query: string) {
+    this.filteredPokemonList = this.pokemonList.filter(pokemon =>
+      pokemon.name.toLowerCase().includes(query)
+    );
   }
 
   onNextPage(): void {
@@ -94,5 +105,9 @@ export class PokemonListComponent implements OnInit {
       this.offset -= this.limit;
       this.loadPokemon();
     }
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.count / this.limit);
   }
 }

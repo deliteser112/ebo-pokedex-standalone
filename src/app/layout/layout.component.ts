@@ -1,7 +1,6 @@
-// src/app/layout/layout.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SortService } from '../sort.service';
 
@@ -14,12 +13,23 @@ import { SortService } from '../sort.service';
 })
 export class LayoutComponent {
   sortOption: string = 'default';
+  searchQuery: string = '';
 
-  constructor(private sortService: SortService) {}
+  constructor(private sortService: SortService, private router: Router) { }
 
   onSortChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.sortOption = selectElement.value;
-    this.sortService.setSortOption(this.sortOption); // Update the service with the new sort option
+    this.sortService.setSortOption(this.sortOption);
+  }
+
+  onSearchChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.searchQuery = inputElement.value.toLowerCase();
+    this.sortService.setSearchQuery(this.searchQuery);
+  }
+
+  goToHome(): void {
+    this.router.navigate(['/']);
   }
 }

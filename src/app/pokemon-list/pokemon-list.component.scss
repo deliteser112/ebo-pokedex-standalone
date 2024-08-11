@@ -1,7 +1,9 @@
 .scroll-viewport {
     display: block;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 190px);
     width: 100%;
+    max-width: 1440px;
+    margin: auto;
 }
 
 .pokemon-grid {
@@ -119,6 +121,7 @@
 .pagination-controls {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: 20px 0;
 
     button {

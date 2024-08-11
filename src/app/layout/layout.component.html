@@ -1,6 +1,18 @@
 <div class="toolbar">
-  <img src="assets/pokemon-logo.png" alt="Pokémon Logo" class="logo" />
+  <img
+    src="assets/pokemon-logo.png"
+    alt="Pokémon Logo"
+    class="logo"
+    (click)="goToHome()"
+  />
   <div class="spacer"></div>
+  <input
+    type="text"
+    placeholder="Search Pokémon..."
+    [(ngModel)]="searchQuery"
+    (input)="onSearchChange($event)"
+    class="search-input"
+  />
   <select
     [(ngModel)]="sortOption"
     (change)="onSortChange($event)"

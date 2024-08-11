@@ -1,27 +1,70 @@
-# EboPokedexStandalone
+# Pokémon List App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.13.
+A simple web application built with Angular that displays a list of Pokémon, allows searching, sorting, pagination, and viewing detailed information about each Pokémon. The app uses the PokéAPI to fetch data.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Display a list of Pokémon with their details.
+- Search Pokémon by name.
+- Sort Pokémon by default order or by Pokédex order.
+- Pagination support to browse through the Pokémon list.
+- View detailed information for each Pokémon.
+- Responsive design.
 
-## Code scaffolding
+## Technologies Used
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Angular - Frontend framework
+- Angular CDK - Virtual scrolling
+- RxJS - Reactive programming
+- TypeScript - Superset of JavaScript
+- SCSS - CSS preprocessor for styling
+- PokéAPI - Free Pokémon API
 
-## Build
+## Setup Instructions
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Clone the repository:
 
-## Running unit tests
+```bash
+git https://github.com/deliteser112/ebo-pokedex-standalone.git
+cd ebo-pokedex-standalone
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2. Install dependencies:
 
-## Running end-to-end tests
+Make sure you have Node.js and npm installed. Then run:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+npm install
+```
 
-## Further help
+3. Run the development server:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+npm start
+```
+
+The application will be served at http://localhost:4200/. Open it in your browser.
+
+4. Build the project for production:
+
+```bash
+npm run build
+```
+
+The build artifacts will be stored in the dist/ directory.
+
+## Usage
+
+- **Search Pokémon:** Enter a Pokémon name in the search bar to filter the list.
+- **Sort Pokémon:** Use the dropdown to sort Pokémon by default order or by Pokédex order.
+- **Pagination:** Navigate through the Pokémon list using the "Previous" and "Next" buttons.
+- **View Details:** Click on a Pokémon card to view detailed information.
+
+## Development
+
+### Commands
+
+- Start development server: `npm start`
+- Run unit tests: `npm test`
+- Run end-to-end tests: `npm run e2e`
+- Build for production: `npm run build`
